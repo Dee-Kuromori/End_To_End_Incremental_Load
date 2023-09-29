@@ -1,0 +1,56 @@
+
+########################Incremental Load###########################
+
+##########set jars and go into pyspark#######3
+pyspark --master local[*] --jars postgresql-42.6.0.jar
+
+
+####give the RDBMS url########
+dburl="jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb"
+
+#####put hive database name and table name in variable####
+database_name_hive = "fraud_project"
+table_name_hive = "fraud_full_load_external"
+
+#####put postgres database table name in variable####
+table_name_postgres = "frauddetection_sample"
+
+
+#####put hive query to select max row in a variable########
+hive_query = "select max(row_id) from fraud_project.fraud_full_load_external"
+
+#######select the max row number from the table#########
+max = spark.sql(hive_query)
+
+####convert max row_id from dataframe to value#######3333
+max = max.first()['max(row_id)']
+
+######create variable for query string that will be used in spark.sql() to select rows 
+######from the Postgres database that are
+#####greater than max row_id in hive table
+postgres_query = "(select * from " + table_name_postgres +" where row_id >"+str(max)+ ") as max_table"
+
+
+#####read postgres table using postgres_query as parameter
+
+
+df = spark.read.format("jdbc").option("url",dburl) \
+    .option("driver", "org.postgresql.Driver").option("dbtable", postgres_query) \
+    .option("user", "consultants").option("password", "WelcomeItc@2022").load()
+
+
+
+
+#####append dataframe to table###
+df.write.mode('append').format("parquet").saveAsTable(database_name_hive+ "." + table_name_hive)
+
+####stop spark session####
+spark.stop()
+
+
+
+
+
+
+
+
