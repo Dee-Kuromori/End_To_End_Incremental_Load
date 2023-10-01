@@ -3,6 +3,7 @@
 
 ##########set jars and go into pyspark#######3
 pyspark --master local[*] --jars postgresql-42.6.0.jar
+spark-submit 
 
 
 ####give the RDBMS url########
