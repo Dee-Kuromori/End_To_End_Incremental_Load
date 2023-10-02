@@ -1,10 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
+
 spark = SparkSession \
     .builder \
     .appName("Postgres Table Load") \
     .master("local") \
-    .enableHiveSupport().getOrCreate()
+    .enableHiveSupport()\
+    .getOrCreate()
 
 
 dburl="jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb"
