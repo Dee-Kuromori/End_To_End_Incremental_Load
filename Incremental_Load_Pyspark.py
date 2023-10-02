@@ -37,7 +37,7 @@ df = spark.read.format("jdbc").option("url",dburl) \
     .option("driver", "org.postgresql.Driver").option("dbtable", postgres_query) \
     .option("user", "consultants").option("password", "WelcomeItc@2022").load()
 
-df.write.mode('append').format("parquet").saveAsTable(database_name_hive+ "." + table_name_hive)
+df.write.mode('append').format("hive").saveAsTable(database_name_hive+ "." + table_name_hive)
 
 
 spark.stop()
