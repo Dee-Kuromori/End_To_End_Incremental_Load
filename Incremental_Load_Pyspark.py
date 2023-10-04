@@ -33,7 +33,7 @@ max = max.first()['max(row_id)']
 max += 1
 end_row = max + 10000
 
-postgres_query = "(select * from " + table_name_postgres +" where row_id between"+str(max)+" and " + str(end_row) + ") as max_table"
+postgres_query = "(select * from " + table_name_postgres +" where row_id between "+str(max)+" and " + str(end_row) + ") as max_table"
 
 df = spark.read.format("jdbc").option("url",dburl) \
     .option("driver", "org.postgresql.Driver").option("dbtable", postgres_query) \
