@@ -22,7 +22,7 @@ database_name_hive = "fraud_project"
 table_name_hive = "fraud_full_load_external"
 
 
-table_name_postgres = "frauddetection_sample_milli"
+table_name_postgres = "frauddetection"
 
 
 hive_query = "select max(row_id) from fraud_project.fraud_full_load_external"
