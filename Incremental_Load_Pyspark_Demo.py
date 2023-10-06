@@ -18,7 +18,7 @@ spark = SparkSession \
 
 dburl="jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb"
 
-database_name_hive = "ffraud_project_demo"
+database_name_hive = "fraud_project_demo"
 table_name_hive = "fraud_full_load_demo"
 
 
