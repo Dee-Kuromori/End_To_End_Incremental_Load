@@ -41,8 +41,6 @@ df = spark.read.format("jdbc").option("url",dburl) \
 
 df = df.withColumnRenamed("type", "transaction_type")
 
-df.drop('max_row', axis=1)
-
 df.write.mode('append').format("hive").saveAsTable(database_name_hive+ "." + table_name_hive)
 
 
