@@ -18,11 +18,13 @@ TABLE_NAME = 'FraudAnalysis_Demetric'
 csv_file_path = "FraudAnalysis.csv"
 data = pd.read_csv(csv_file_path)
 
-# Create a SQLAlchemy engine and connect to the database
-engine = create_engine(DATABASE_URL)
+print(len(data))
 
-# Upload the data to the database table
-data.to_sql(TABLE_NAME, engine, if_exists='append', index=False)
+# Create a SQLAlchemy engine and connect to the database
+# engine = create_engine(DATABASE_URL)
+
+# # Upload the data to the database table
+# data.to_sql(TABLE_NAME, engine, if_exists='append', index=False)
 
 print('CSV data successfully uploaded to the database table.')
 
